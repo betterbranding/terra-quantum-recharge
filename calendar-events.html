@@ -591,41 +591,80 @@ fetch('nav.html')
     };
   }
 
-  // Wave animation
   const canvas=document.getElementById('heroWaveCanvas');
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
   const noise=createNoise();
-  const colors=['#7c3aed','#a855f7','#c084fc','#e879f9','#22d3ee','#38bdf8'];
+  
+  // Iridescent color palette with glow colors
+  const waveColors=[
+    {stroke:'rgba(124,58,237,0.85)', glow:'rgba(124,58,237,0.6)'},   // purple
+    {stroke:'rgba(168,85,247,0.85)', glow:'rgba(168,85,247,0.6)'},   // violet
+    {stroke:'rgba(192,132,252,0.8)', glow:'rgba(192,132,252,0.5)'},  // lavender
+    {stroke:'rgba(232,121,249,0.85)', glow:'rgba(232,121,249,0.6)'}, // magenta
+    {stroke:'rgba(34,211,238,0.85)', glow:'rgba(34,211,238,0.6)'},   // cyan
+    {stroke:'rgba(56,189,248,0.8)', glow:'rgba(56,189,248,0.5)'}     // sky blue
+  ];
+  
   let w,h,time=0,raf;
+  const isMobile=()=>window.innerWidth<768;
 
   function resize(){
     const rect=canvas.getBoundingClientRect();
     w=canvas.width=rect.width;
     h=canvas.height=rect.height;
-    ctx.filter='blur(8px)';
   }
 
   function drawWaves(count){
     time+=0.0015;
+    // On mobile, position waves in top 30% of hero; on desktop, center
+    const baseY=isMobile()?h*0.22:h*0.5;
+    
     for(let i=0;i<count;i++){
-      ctx.beginPath();
-      ctx.lineWidth=45;
-      ctx.strokeStyle=colors[i%colors.length];
-      const amp=i<2?50:100;
+      const color=waveColors[i%waveColors.length];
+      const amp=isMobile()?(i<2?30:60):(i<2?50:100);
       const spd=i<2?0.4:1.0;
+      const lw=isMobile()?30:45;
+      
+      // Draw glow layer (wider, blurred)
+      ctx.save();
+      ctx.beginPath();
+      ctx.lineWidth=lw+20;
+      ctx.strokeStyle=color.glow;
+      ctx.filter='blur(12px)';
+      ctx.globalAlpha=0.5;
       for(let x=0;x<w;x+=5){
         const n=noise(x/800,0.3*i,time*spd)*amp;
-        ctx.lineTo(x,n+h*0.5);
+        const yOffset=i*((isMobile()?15:20));
+        ctx.lineTo(x,n+baseY+yOffset);
       }
       ctx.stroke();
       ctx.closePath();
+      ctx.restore();
+      
+      // Draw main wave (sharp, bright)
+      ctx.save();
+      ctx.beginPath();
+      ctx.lineWidth=lw;
+      ctx.strokeStyle=color.stroke;
+      ctx.filter='blur(6px)';
+      ctx.globalAlpha=0.9;
+      ctx.shadowColor=color.glow;
+      ctx.shadowBlur=25;
+      for(let x=0;x<w;x+=5){
+        const n=noise(x/800,0.3*i,time*spd)*amp;
+        const yOffset=i*((isMobile()?15:20));
+        ctx.lineTo(x,n+baseY+yOffset);
+      }
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
     }
   }
 
   function animate(){
-    ctx.fillStyle='#0a0a1a';
-    ctx.globalAlpha=0.4;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='rgba(10,10,26,0.3)';
     ctx.fillRect(0,0,w,h);
     drawWaves(6);
     raf=requestAnimationFrame(animate);
