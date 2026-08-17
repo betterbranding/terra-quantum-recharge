@@ -1,0 +1,31 @@
+<script>
+/* Terra Quantum Recharge loader v5 (body element) | FAQ */
+(function () {
+  var GH = 'https://betterbranding.github.io/terra-quantum-recharge';
+  try {
+    var st = document.createElement('style');
+    st.id = 'fastSplash';
+    st.textContent = 'html{background:#100a18!important}body>*{visibility:hidden!important}' +
+      'html::before{content:\"\";position:fixed;inset:0;z-index:2147483646;background-color:#100a18;' +
+      'background-image:url(' + GH + '/v3/img/logo.png);background-repeat:no-repeat;' +
+      'background-position:center calc(50% - 26px);background-size:min(220px,58vw) auto}' +
+      'html::after{content:\"\";position:fixed;top:calc(50% + 30px);left:50%;width:26px;height:26px;margin-left:-13px;' +
+      'border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:#f0c05a;' +
+      'animation:fastspin .7s linear infinite;z-index:2147483647}' +
+      '@keyframes fastspin{to{transform:rotate(360deg)}}' +
+      '@media (prefers-reduced-motion:reduce){html::after{animation:none}}';
+    (document.head || document.documentElement).appendChild(st);
+  } catch (e) {}
+  fetch(GH + '/pages/faq.html?v=1').then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  }).then(function (html) {
+    document.open();
+    document.write(html);
+    document.close();
+  }).catch(function (e) {
+    var s = document.getElementById('fastSplash');
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+  });
+})();
+</script>
