@@ -539,7 +539,7 @@ details.faq .faq-body p { font-size: 1.02rem; }
   color: rgba(255,255,255,0.88); position: relative; z-index: 2;
 }
 .benefit-card .b-emoji {
-  height: 52px; width: auto; margin-bottom: 14px; display: block;
+  height: 52px; width: auto; align-self: flex-start; margin-bottom: 14px; display: block;
   filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4)); position: relative; z-index: 2;
 }
 .benefit-card::before {
