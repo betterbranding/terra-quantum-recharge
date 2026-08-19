@@ -469,3 +469,100 @@ details.faq .faq-body p { font-size: 1.02rem; }
   .tqr-nav .btn { display: none; }
   .tqr-footer .top { grid-template-columns: 1fr; }
 }
+
+
+/* ========== V3.1 hybrid: hero images + energetic FX ========== */
+.hero.hero-img {
+  background:
+    linear-gradient(100deg, rgba(16,8,28,0.93) 0%, rgba(18,9,32,0.78) 42%, rgba(26,10,46,0.42) 100%),
+    var(--hero-img) center 38%/cover no-repeat;
+  border-bottom: 1px solid rgba(240,192,90,0.18);
+}
+.hero.hero-img::before {
+  background:
+    radial-gradient(650px 420px at 78% 30%, rgba(139,92,246,0.32), transparent 60%),
+    radial-gradient(520px 380px at 88% 75%, rgba(255,46,154,0.2), transparent 55%);
+}
+.hero-fx { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero.hero-img .wrap { position: relative; z-index: 1; }
+.hero-fx .orb {
+  position: absolute; border-radius: 50%; filter: blur(38px); opacity: 0.5;
+  animation: orbFloat 14s ease-in-out infinite;
+}
+.hero-fx .o1 { width: 300px; height: 300px; right: 6%; top: 8%;
+  background: radial-gradient(circle, rgba(168,85,247,0.5), transparent 70%); }
+.hero-fx .o2 { width: 220px; height: 220px; right: 26%; bottom: 4%;
+  background: radial-gradient(circle, rgba(255,46,154,0.38), transparent 70%); animation-delay: -5s; animation-duration: 17s; }
+.hero-fx .o3 { width: 180px; height: 180px; left: 4%; bottom: 12%;
+  background: radial-gradient(circle, rgba(240,192,90,0.28), transparent 70%); animation-delay: -9s; animation-duration: 21s; }
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(-28px,-34px) scale(1.08); }
+  66% { transform: translate(22px,18px) scale(0.94); }
+}
+.hero-fx .spark {
+  position: absolute; color: #f5d488; font-size: 15px;
+  text-shadow: 0 0 12px rgba(245,212,136,0.9);
+  animation: sparklePulse 3.4s ease-in-out infinite;
+}
+.hero-fx .s1 { right: 12%; top: 22%; }
+.hero-fx .s2 { right: 30%; top: 55%; font-size: 11px; animation-delay: -0.9s; }
+.hero-fx .s3 { right: 20%; top: 74%; font-size: 19px; animation-delay: -1.7s; }
+.hero-fx .s4 { left: 12%; top: 16%; font-size: 12px; animation-delay: -2.3s; }
+.hero-fx .s5 { right: 6%; top: 62%; font-size: 13px; animation-delay: -2.9s; }
+.hero-fx .s6 { left: 30%; top: 82%; font-size: 11px; animation-delay: -1.2s; }
+@keyframes sparklePulse {
+  0%,100% { opacity: 0.15; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.25) rotate(24deg); }
+}
+
+/* ========== V3.1 hybrid: color benefit cards ========== */
+.benefit-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+}
+@media (max-width: 1080px) { .benefit-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .benefit-grid { grid-template-columns: 1fr; } }
+.benefit-card {
+  position: relative; overflow: hidden; border-radius: 20px;
+  padding: 30px 26px; min-height: 205px;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.benefit-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
+.benefit-card h3 {
+  font-size: 1.28rem; color: #fff; margin: 0 0 6px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35); position: relative; z-index: 2;
+}
+.benefit-card p {
+  font-size: 0.98rem; line-height: 1.55; margin: 0;
+  color: rgba(255,255,255,0.88); position: relative; z-index: 2;
+}
+.benefit-card .b-emoji {
+  height: 52px; width: auto; margin-bottom: 14px; display: block;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4)); position: relative; z-index: 2;
+}
+.benefit-card::before {
+  content: ""; position: absolute; inset: -2px; border-radius: 22px; padding: 2px;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+  background-size: 200% 200%; animation: cardShine 4.5s ease-in-out infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  z-index: 1; pointer-events: none;
+}
+@keyframes cardShine {
+  0%,100% { background-position: 0% 0%; } 50% { background-position: 100% 100%; }
+}
+.bc-volt  { background: linear-gradient(135deg, #1a1200 0%, #8a5a0e 55%, #d9a92e 100%); }
+.bc-flame { background: linear-gradient(135deg, #2a0510 0%, #9b1b4b 55%, #ff2e9a 100%); }
+.bc-zen   { background: linear-gradient(135deg, #150a2e 0%, #4c2a9e 55%, #8b5cf6 100%); }
+.bc-heal  { background: linear-gradient(135deg, #02201a 0%, #067a5e 55%, #2ed3a5 100%); }
+.bc-heart { background: linear-gradient(135deg, #1e0a24 0%, #7e22ce 55%, #d05ce8 100%); }
+.bc-mind  { background: linear-gradient(135deg, #002832 0%, #0e7490 55%, #22d3ee 100%); }
+.bc-calm  { background: linear-gradient(135deg, #0d1233 0%, #263fa8 55%, #7386f0 100%); }
+.bc-star  { background: linear-gradient(135deg, #1c0b2e 0%, #6b21a8 55%, #b06cf7 100%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fx .orb, .hero-fx .spark, .benefit-card::before { animation: none; }
+  .hero-fx .spark { opacity: 0.6; }
+}
