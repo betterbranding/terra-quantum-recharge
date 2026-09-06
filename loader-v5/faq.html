@@ -7,7 +7,7 @@
     st.id = 'fastSplash';
     st.textContent = 'html{background:#100a18!important}body>*{visibility:hidden!important}' +
       'html::before{content:\"\";position:fixed;inset:0;z-index:2147483646;background-color:#100a18;' +
-      'background-image:url(' + GH + '/v3/img/logo.png);background-repeat:no-repeat;' +
+      'background-image:url(' + GH + '/v3/img/logo-white.png);background-repeat:no-repeat;' +
       'background-position:center calc(50% - 26px);background-size:min(220px,58vw) auto}' +
       'html::after{content:\"\";position:fixed;top:calc(50% + 30px);left:50%;width:26px;height:26px;margin-left:-13px;' +
       'border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:#f0c05a;' +
@@ -16,7 +16,7 @@
       '@media (prefers-reduced-motion:reduce){html::after{animation:none}}';
     (document.head || document.documentElement).appendChild(st);
   } catch (e) {}
-  fetch(GH + '/pages/faq.html?v=1').then(function (r) {
+  fetch(GH + '/pages/faq.html?v=2').then(function (r) {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.text();
   }).then(function (html) {
