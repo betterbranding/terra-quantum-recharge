@@ -101,6 +101,10 @@
       } else if (node.nodeType === 1 && node.tagName !== 'BR') { Array.from(node.childNodes).forEach(walk); }
     }
     Array.from(el.childNodes).forEach(walk);
+    el.querySelectorAll('.accent').forEach(function (acc) {
+      var cs = acc.querySelectorAll('.char'), n = Math.max(cs.length - 1, 1);
+      cs.forEach(function (c, i) { c.style.setProperty('--i', (i / n) * 100); });
+    });
     return chars;
   }
 

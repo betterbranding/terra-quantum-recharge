@@ -52,10 +52,11 @@ h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:
 p{color:var(--ink-2);margin-bottom:1em}
 p:last-child{margin-bottom:0}
 strong{color:var(--ink);font-weight:600}
-.accent{
+.accent,.accent .char{
   background:linear-gradient(100deg,var(--violet-2) 0%,var(--pink) 45%,var(--gold-2) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
+.accent .char{background-size:600% 100%;background-position:calc(var(--i,0) * 1%) 0}
 .gold-italic{color:var(--gold);font-style:italic;font-weight:400}
 p.lead{font-size:1.2rem;color:var(--ink-2);line-height:1.55}
 
@@ -127,8 +128,8 @@ body{counter-reset:sec}
   transition:padding .4s var(--ease),background .4s;
 }
 .tqr-nav.scrolled .bar{padding:6px 8px 6px 16px;background:rgba(10,5,38,.8)}
-.tqr-nav .logo img{height:40px;width:auto;transition:height .4s var(--ease)}
-.tqr-nav.scrolled .logo img{height:32px}
+.tqr-nav .logo img{height:52px;width:auto;transition:height .4s var(--ease)}
+.tqr-nav.scrolled .logo img{height:42px}
 .tqr-nav .links{display:flex;gap:2px;margin-left:auto}
 .tqr-nav .links a{
   position:relative;font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--ink-2);
@@ -291,7 +292,8 @@ ul.checks li::before{content:"✓";position:absolute;left:0;top:7px;width:22px;h
 .photo{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-2)}
 .photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;transition:transform 1.2s var(--ease)}
 .photo:hover img{transform:scale(1.04)}
-.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(5,2,26,.55));pointer-events:none}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 75%,rgba(5,2,26,.35));pointer-events:none}
+.photo img{filter:brightness(1.12) contrast(1.05)}
 .photo-accent::before{content:"";position:absolute;inset:-1px;border-radius:inherit;z-index:2;pointer-events:none;
   background:linear-gradient(135deg,rgba(240,192,90,.6),transparent 40%,transparent 60%,rgba(217,70,239,.6));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px}
