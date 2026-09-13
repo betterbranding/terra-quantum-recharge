@@ -184,7 +184,8 @@
 
     /* cards & benefit cards stagger-in */
     d.querySelectorAll('.grid-2-cards, .grid-3, .benefit-grid, .photo-band').forEach(function (grid) {
-      var kids = grid.children; if (!kids.length) return;
+      var kids = Array.from(grid.children); if (!kids.length) return;
+      kids.forEach(function (k) { k.classList.remove('reveal', 'visible', 'd1', 'd2', 'd3', 'd4', 'd5'); });
       gsap.from(kids, { y: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: grid, start: 'top 85%', once: true } });
     });
   } else {
