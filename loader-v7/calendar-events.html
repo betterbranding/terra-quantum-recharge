@@ -1,0 +1,38 @@
+<script>
+/* Terra Quantum Recharge loader v7 bootstrap | calendar-events | engine: /assets/loader/v7.js */
+(function () {
+  var GH = 'https://betterbranding.github.io/terra-quantum-recharge';
+  var SRC = GH + '/pages/calendar-events.html?v=1';
+  var ENGINE = 'https://betterbranding.github.io/terra-quantum-recharge/assets/loader/v7.js?v=1';
+  var boot = window.__drBoot = { done: false, swapped: false, splash: null, ssrHead: [], gtmInline: [], html: null };
+  try {
+    var sp = document.createElement('style');
+    sp.id = 'fastSplash';
+    sp.textContent = 'html{background:#05021a!important}body>*{visibility:hidden!important}' +
+      'html::before{content:"";position:fixed;inset:0;z-index:2147483646;background-color:#05021a;' +
+      'background-image:url(https://betterbranding.github.io/terra-quantum-recharge/v4/img/logo-white.png);background-repeat:no-repeat;' +
+      'background-position:center calc(50% - 26px);background-size:min(220px,58vw) auto}' +
+      'html::after{content:"";position:fixed;top:calc(50% + 30px);left:50%;width:26px;height:26px;margin-left:-13px;' +
+      'border-radius:50%;border:2px solid rgba(255,255,255,.18);border-top-color:#f0c05a;' +
+      'animation:fastspin .8s linear infinite;z-index:2147483647}' +
+      '@keyframes fastspin{to{transform:rotate(360deg)}}' +
+      '@media (prefers-reduced-motion:reduce){html::after{animation:none}}';
+    (document.head || document.documentElement).appendChild(sp);
+    boot.splash = sp;
+  } catch (e) {}
+  try {
+    boot.ssrHead = Array.prototype.slice.call(document.head.children);
+    var ss = document.getElementsByTagName('script');
+    for (var i = 0; i < ss.length; i++) {
+      if (!ss[i].getAttribute('src') && /googletagmanager\.com\/gtm\.js/.test(ss[i].textContent || '')) boot.gtmInline.push(ss[i]);
+    }
+  } catch (e) {}
+  boot.html = fetch(SRC).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); });
+  boot.html.catch(function () {});
+  var eng = document.createElement('script');
+  eng.src = ENGINE; eng.async = true; eng.setAttribute('data-dr', '');
+  eng.onerror = function () { if (boot.splash && boot.splash.parentNode) boot.splash.parentNode.removeChild(boot.splash); };
+  (document.head || document.documentElement).appendChild(eng);
+  setTimeout(function () { if (!boot.swapped && boot.splash && boot.splash.parentNode) boot.splash.parentNode.removeChild(boot.splash); }, 12000);
+})();
+</script>
