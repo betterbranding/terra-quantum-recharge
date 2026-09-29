@@ -123,7 +123,7 @@
     var scripts = b.querySelectorAll('script');
     for (i = 0; i < scripts.length; i++) {
       el = scripts[i];
-      if (el.hasAttribute('data-dr') || gtmInline.indexOf(el) >= 0) continue;
+      if (el.hasAttribute('data-dr') || gtmInline.indexOf(el) >= 0 || /loader v7 bootstrap/.test(el.textContent || '')) continue;
       if (el.getAttribute('src') && GTM_RE.test(el.getAttribute('src'))) continue;
       if (skipGtm(el)) { el.parentNode.removeChild(el); continue; }
       if (el.type === 'application/ld+json') continue;
